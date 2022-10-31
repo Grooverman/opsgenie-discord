@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve Opsgenie-Discord Bridge
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/opsgenie-discord
+Environment="PATH=/opt/opsgenie-discord/.venv/bin"
+ExecStart=/opt/opsgenie-discord/.venv/bin/gunicorn --workers 2 --bind 127.0.0.1:5001 -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+
